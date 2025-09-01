@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Platform,
 } from 'react-native';
 import { CartContext } from '../Context/CartContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -120,7 +121,11 @@ const CartScreen = () => {
 export default CartScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
+  container: { flex: 1, backgroundColor: '#fff',...Platform.select({
+    ios:{
+      marginBottom:-33
+    }
+  }) },
   empty: { textAlign: 'center', marginTop: 20, color: '#888' },
   item: {
     flexDirection: 'row',
@@ -128,12 +133,13 @@ const styles = StyleSheet.create({
     padding: 12,
     marginHorizontal: 12,
     marginVertical: 6,
-    backgroundColor: '#f9f9f9',
     borderRadius: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 5,
-    elevation: 2,
+    ...Platform.select({
+      android:{
+        elevation: 2,
+        backgroundColor: '#f9f9f9',
+      }
+    })
   },
   image: {
     width: 80,

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CartContext } from '../Context/CartContext';
 import { CommonActions, useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ProfileScreen = () => {
   const { user, setUser, setIsLoggedIn, setCart } = useContext(CartContext);
@@ -29,7 +30,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Profile</Text>
       {user && (
         <View style={styles.userInfo}>
@@ -49,7 +50,7 @@ const ProfileScreen = () => {
       <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -51,7 +51,7 @@ const HomeScreem = () => {
     fetchProducts();
   }, []);
 
-  const showToast = (message) => {
+  const showToast = message => {
     if (Platform.OS === 'android') {
       ToastAndroid.show(message, ToastAndroid.SHORT);
     } else {
@@ -173,7 +173,13 @@ const HomeScreem = () => {
 export default HomeScreem;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fafafa' },
+  container: { flex: 1, backgroundColor: '#fafafa',
+    ...Platform.select({
+      ios:{
+        marginBottom:-40
+      }
+    })
+   },
 
   banner: {
     marginVertical: 16,
@@ -184,7 +190,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bannerText: { fontSize: 18, fontWeight: 'bold', color: '#ff6347' },
-  productList: { paddingHorizontal: 10, paddingBottom: 20 },
+  productList: { paddingHorizontal: 10, paddingBottom: 20, },
   row: { justifyContent: 'space-between' },
   card: {
     flex: 1,
@@ -193,11 +199,15 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 12,
     marginHorizontal: 4,
-    elevation: 2,
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    ...Platform.select({
+      android: {
+        elevation: 2,
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+      },
+    }),
   },
   image: {
     height: 120,
